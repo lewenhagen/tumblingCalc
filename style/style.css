@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+body {
+    overflow-x: hidden;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 52px;
+}
+
+.btn:hover{
+    background-color: #ddd;
+}
+
+.logo {
+    margin: 0 auto;
+    width: 300px;
+    display: block;
+}
+
+.jumbotron {
+    text-align: center;
+}
+
+.btn-lg {
+    font-size: 34px;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+   background-color: #A6B6CB;
+}
+
+footer {
+    margin-top: 50px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.clearLinks {
+    list-style-type: none;
+}
