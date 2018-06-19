@@ -32,23 +32,24 @@
     <div class="row">
         <!-- <div class="col-md-1"></div> -->
         <div class="col">
+            <h2>Team round</h2>
             <table class="table roundone">
                 <thead>
                     <tr>
-                        <th>Round 1</th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
+                        <th></th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>G1</td>
-                        <td id="diff"></td>
+                        <td>G1-6</td>
+                        <td id="diff1"></td>
                         <td id="r1g1e1" class="element"></td>
                         <td id="r1g1e2" class="element"></td>
                         <td id="r1g1e3" class="element"></td>
                         <td id="r1g1e4" class="element"></td>
                         <td id="r1g1e5" class="element"></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>G2</td>
                         <td></td>
                         <td id="r1g2e1" class="element"></td>
@@ -92,10 +93,10 @@
                         <td id="r1g6e3" class="element"></td>
                         <td id="r1g6e4" class="element"></td>
                         <td id="r1g6e5" class="element"></td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>Sum</td>
-                        <td></td>
+                        <td><span id="sum1">0</span></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -109,16 +110,17 @@
 
     <div class="row">
         <!-- <div class="col"> -->
+        <h2>Round 2</h2>
             <table class="table roundtwo">
                 <thead>
                     <tr>
-                        <th>Round 2</th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
+                        <th></th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>G1</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g1e1" class="element"></td>
                         <td id="r2g1e2" class="element"></td>
                         <td id="r2g1e3" class="element"></td>
@@ -127,7 +129,7 @@
                     </tr>
                     <tr>
                         <td>G2</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g2e1" class="element"></td>
                         <td id="r2g2e2" class="element"></td>
                         <td id="r2g2e3" class="element"></td>
@@ -136,7 +138,7 @@
                     </tr>
                     <tr>
                         <td>G3</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g3e1" class="element"></td>
                         <td id="r2g3e2" class="element"></td>
                         <td id="r2g3e3" class="element"></td>
@@ -145,7 +147,7 @@
                     </tr>
                     <tr>
                         <td>G4</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g4e1" class="element"></td>
                         <td id="r2g4e2" class="element"></td>
                         <td id="r2g4e3" class="element"></td>
@@ -154,7 +156,7 @@
                     </tr>
                     <tr>
                         <td>G5</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g5e1" class="element"></td>
                         <td id="r2g5e2" class="element"></td>
                         <td id="r2g5e3" class="element"></td>
@@ -163,7 +165,7 @@
                     </tr>
                     <tr>
                         <td>G6</td>
-                        <td></td>
+                        <td class="diff2"></td>
                         <td id="r2g6e1" class="element"></td>
                         <td id="r2g6e2" class="element"></td>
                         <td id="r2g6e3" class="element"></td>
@@ -172,7 +174,7 @@
                     </tr>
                     <tr>
                         <td>Sum</td>
-                        <td></td>
+                        <td><span id="sum2">0</span></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -185,17 +187,18 @@
 
 
     <div class="row">
-        <div class="col">
+        <!-- <div class="col"> -->
+            <h2>Round 3</h2>
             <table class="table roundthree">
                 <thead>
                     <tr>
-                        <th>Round 3</th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
+                        <th></th><th>Diff</th><th>Element 1</th><th>Element 2</th><th>Element 3</th><th>Element 4</th><th>Element 5</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>G1</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g1e1" class="element"></td>
                         <td id="r3g1e2" class="element"></td>
                         <td id="r3g1e3" class="element"></td>
@@ -204,7 +207,7 @@
                     </tr>
                     <tr>
                         <td>G2</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g2e1" class="element"></td>
                         <td id="r3g2e2" class="element"></td>
                         <td id="r3g2e3" class="element"></td>
@@ -213,7 +216,7 @@
                     </tr>
                     <tr>
                         <td>G3</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g3e1" class="element"></td>
                         <td id="r3g3e2" class="element"></td>
                         <td id="r3g3e3" class="element"></td>
@@ -222,7 +225,7 @@
                     </tr>
                     <tr>
                         <td>G4</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g4e1" class="element"></td>
                         <td id="r3g4e2" class="element"></td>
                         <td id="r3g4e3" class="element"></td>
@@ -231,7 +234,7 @@
                     </tr>
                     <tr>
                         <td>G5</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g5e1" class="element"></td>
                         <td id="r3g5e2" class="element"></td>
                         <td id="r3g5e3" class="element"></td>
@@ -240,7 +243,7 @@
                     </tr>
                     <tr>
                         <td>G6</td>
-                        <td></td>
+                        <td class="diff3"></td>
                         <td id="r3g6e1" class="element"></td>
                         <td id="r3g6e2" class="element"></td>
                         <td id="r3g6e3" class="element"></td>
@@ -249,7 +252,7 @@
                     </tr>
                     <tr>
                         <td>Sum</td>
-                        <td></td>
+                        <td><span id="sum3">0</span></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -257,7 +260,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        <!-- </div> -->
     </div>
 
 
