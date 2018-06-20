@@ -12,12 +12,22 @@
                 [],
                 [],
                 []
+            ],
+            "clicked": [
+                [],
+                [],
+                []
             ]
         },
         {
             "gym": 2,
             "counter": 0,
             "el": [
+                [],
+                [],
+                []
+            ],
+            "clicked": [
                 [],
                 [],
                 []
@@ -30,12 +40,22 @@
                 [],
                 [],
                 []
+            ],
+            "clicked": [
+                [],
+                [],
+                []
             ]
         },
         {
             "gym": 4,
             "counter": 0,
             "el": [
+                [],
+                [],
+                []
+            ],
+            "clicked": [
                 [],
                 [],
                 []
@@ -48,12 +68,22 @@
                 [],
                 [],
                 []
+            ],
+            "clicked": [
+                [],
+                [],
+                []
             ]
         },
         {
             "gym": 6,
             "counter": 0,
             "el": [
+                [],
+                [],
+                []
+            ],
+            "clicked": [
                 [],
                 [],
                 []
@@ -100,6 +130,54 @@
         for (var p in gCounter) {
             if (gCounter[p].gym == num) {
                 gCounter[p].el[round-1].push(parseFloat(parseFloat(score).toFixed(1)));
+                console.log("new: " + gCounter[p].el[round-1]);
+            }
+        }
+    }
+
+    async function addClickedEl(num, round, id) {
+        for (var p in gCounter) {
+            if (gCounter[p].gym == num) {
+                gCounter[p].clicked[round-1].push(id);
+            }
+        }
+    }
+
+    async function addClickedElToAll(round, id) {
+        for (var p in gCounter) {
+            gCounter[p].clicked[round-1].push(id);
+        }
+    }
+
+    async function changeEl(num, round, idIndex, newEl) {
+        // console.log("round: " + round);
+        // console.log("idIndex: " + idIndex);
+        // console.log("newEl: " + newEl);
+        for (var p in gCounter) {
+            if (gCounter[p].gym == num) {
+                gCounter[p].el[round-1][idIndex] = parseFloat(parseFloat(newEl).toFixed(1));
+                console.log(gCounter[p].el[round-1]);
+            }
+
+        }
+    }
+
+    async function changeElOnAll(round, idIndex, newEl) {
+        // console.log("round: " + round);
+        // console.log("idIndex: " + idIndex);
+        // console.log("newEl: " + newEl);
+        for (var p in gCounter) {
+            gCounter[p].el[round-1][idIndex] = parseFloat(parseFloat(newEl).toFixed(1));
+            console.log(gCounter[p].el[round-1]);
+
+        }
+    }
+
+    async function gymContainsClicked(num, round, id) {
+        for (var p in gCounter) {
+            if (gCounter[p].gym == num) {
+                console.log("here2: " + gCounter[p].clicked[round-1]);
+                return gCounter[p].clicked[round-1].indexOf(id);
             }
         }
     }
@@ -133,8 +211,8 @@
         let a = parseFloat(document.getElementById("sum1").innerHTML);
         let b = parseFloat(document.getElementById("sum2").innerHTML);
         let c = parseFloat(document.getElementById("sum3").innerHTML);
-
-        totalscore.innerHTML = a + b + c;
+        let res = parseFloat((a + b + c) / 3).toFixed(2);
+        totalscore.innerHTML = res.substr(0, 3) + "(" + res.slice(-1) + ")";
     }
 
     async function sumScoreRoundOne() {
@@ -152,11 +230,12 @@
 
     async function sumTwoLargestNumbers(numbers) {
         // Ensure the array is sorted large -> small
-        numbers = numbers.sort(function (a, b) {
+        let temp = numbers.slice(0);
+        temp = temp.sort(function (a, b) {
             return b - a;
         });
 
-        return parseFloat((numbers[0] + numbers[1]).toFixed(1));
+        return parseFloat((temp[0] + temp[1]).toFixed(1));
     };
 
     async function getTwoHighestScores(num, round) {
@@ -201,6 +280,8 @@
     }
 
     window.calculate = async function(event) {
+        let clickedId = event.target.parentElement.id;
+        console.log(clickedId);
         let round = event.target.parentElement.parentElement.parentElement.parentElement;
         let points;
         let currRoundGym;
@@ -208,20 +289,28 @@
         let diffholder;
         let nrOfElements;
         let diff;
+        let hasClicked;
 
+        points = await getPoints(event.target.value);
+        console.log(hasClicked);
         if (round.classList.contains("roundone")) {
-            points = await getPoints(event.target.value);
-            handleRoundOne(points);
-            nrOfElements = await getElementLength(1, 1);//await updateAllGymCounter();
-            // console.log("here: " + nrOfElements);
-            // diffholder = event.target.parentElement.parentElement.firstElementChild.nextElementSibling;
-            // diffholder.innerHTML = points.toFixed(1);
+            hasClicked = await gymContainsClicked(1, 1, clickedId);
+            if (hasClicked == -1) {
+                await addClickedElToAll(1, clickedId);
+                handleRoundOne(points);
+                console.log("har inte klickat!!");
+            } else {
+                await changeElOnAll(1, hasClicked, points);
+                console.log("har klickat!!");
+
+            }
+            nrOfElements = await getElementLength(1, 1);
             if (nrOfElements > 2) {
                 points = await getTwoHighestScoresRoundOne(currentGymNumber);
             } else {
                 points = await sumScoreRoundOne(currentGymNumber);
             }
-            // console.log(points);
+
 
             diff = document.getElementById("diff1");
             diff.innerHTML = parseFloat(points).toFixed(1);
@@ -229,13 +318,23 @@
 
 
         } else if (round.classList.contains("roundtwo")) {
-            points = await getPoints(event.target.value);
-            // currRoundGym = event.target.parentElement.parentElement.firstElementChild.innerHTML;
             currentGymNumber = parseInt(event.target.parentElement.parentElement.firstElementChild.innerHTML.slice(-1));
-            nrOfElements = await getElementLength(currentGymNumber, 2);//await updateAllGymCounter();
-            diffholder = event.target.parentElement.parentElement.firstElementChild.nextElementSibling;
-            await updateGymElements(currentGymNumber, points, 2);
+            hasClicked = await gymContainsClicked(currentGymNumber, 2, clickedId);
+            if (hasClicked == -1) {
+                await addClickedEl(currentGymNumber, 2, clickedId);
+                await updateGymElements(currentGymNumber, points, 2);
+                // handleRoundOne(points);
+                // nrOfElements = await getElementLength(1, 1);
+                console.log("har inte klickat!!");
+            } else {
+                await changeEl(currentGymNumber, 2, hasClicked, points);
+                // await updateGymElements(currentGymNumber, points, 2);
 
+                console.log("har klickat!!");
+
+            }
+
+            nrOfElements = await getElementLength(currentGymNumber, 2);
             if (nrOfElements > 1) {
                 points = await getTwoHighestScores(currentGymNumber, 2);
             } else {
@@ -248,13 +347,26 @@
             document.getElementById("sum2").innerHTML = await getAllDiff(2);//parseFloat(parseFloat(diff.innerHTML) * 6).toFixed(1);
 
         } else if (round.classList.contains("roundthree")) {
-            points = await getPoints(event.target.value);
+            hasClicked = await gymContainsClicked(currentGymNumber, 3, clickedId);
+            // points = await getPoints(event.target.value);
             // currRoundGym = event.target.parentElement.parentElement.firstElementChild.innerHTML;
             currentGymNumber = parseInt(event.target.parentElement.parentElement.firstElementChild.innerHTML.slice(-1));
-            nrOfElements = await getElementLength(currentGymNumber, 3);//await updateAllGymCounter();
-            diffholder = event.target.parentElement.parentElement.firstElementChild.nextElementSibling;
-            await updateGymElements(currentGymNumber, points, 3);
+            // diffholder = event.target.parentElement.parentElement.firstElementChild.nextElementSibling;
+            if (hasClicked == -1) {
+                await addClickedEl(currentGymNumber, 3, clickedId);
+                await updateGymElements(currentGymNumber, points, 3);
+                // handleRoundOne(points);
+                // nrOfElements = await getElementLength(1, 1);
+                console.log("har inte klickat!!");
+            } else {
+                await changeEl(currentGymNumber, 3, hasClicked, points);
+                // await updateGymElements(currentGymNumber, points, 2);
 
+                console.log("har klickat!!");
+
+            }
+
+            nrOfElements = await getElementLength(currentGymNumber, 3);//await updateAllGymCounter();
             if (nrOfElements > 1) {
                 points = await getTwoHighestScores(currentGymNumber, 3);
             } else {
@@ -304,7 +416,11 @@
             let select = "<select name='selElement' onchange='window.calculate(event)'>";
             select += "<option value=''>Choose element...</option>"
             data.forEach(function(key, val) {
-                select += "<option value=" + key.id + ">" + key.Name + " (" + key.Value + ")" + "</option>";
+                if (key.Group == "Forward") {
+                    select += "<option value=" + key.id + ">" + "F - " + key.Name + " (" + key.Value + ")" + "</option>";
+                } else {
+                    select += "<option value=" + key.id + ">" + "B - " + key.Name + " (" + key.Value + ")" + "</option>";
+                }
             });
             select += "</select>";
             for (var i = 0; i < elements.length; i++) {
